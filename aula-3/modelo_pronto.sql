@@ -1,0 +1,73 @@
+CREATE TABLE Estoque (
+  Cod_Livro INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Qtd_Estoque INTEGER UNSIGNED NULL,
+  PRIMARY KEY(Cod_Livro)
+);
+
+CREATE TABLE Editora (
+  Cod_Editora INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Contato VARCHAR NULL,
+  Email VARCHAR NULL,
+  Nome_Editora VARCHAR NULL,
+  Tel_Contato VARCHAR NULL,
+  PRIMARY KEY(Cod_Editora)
+);
+
+CREATE TABLE Cliente (
+  Cod_Cliente INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Nome VARCHAR NULL,
+  Telefone VARCHAR NULL,
+  Telefone2 VARCHAR NULL,
+  Rua VARCHAR NULL,
+  Numero INTEGER UNSIGNED NULL,
+  Complemento VARCHAR NULL,
+  CEP VARCHAR NULL,
+  Cidade VARCHAR NULL,
+  Estado VARCHAR NULL,
+  Tipo_Cliente INTEGER UNSIGNED NULL,
+  CPF_CNPJ VARCHAR NULL,
+  RG_IE VARCHAR NULL,
+  PRIMARY KEY(Cod_Cliente)
+);
+
+CREATE TABLE Livro (
+  Cod_Livro INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Estoque_Cod_Livro INTEGER UNSIGNED NOT NULL,
+  Editora_Cod_Editora INTEGER UNSIGNED NOT NULL,
+  Nome_Livro VARCHAR NULL,
+  Autor VARCHAR NULL,
+  Preco FLOAT NULL,
+  Categoria VARCHAR NULL,
+  ISBN VARCHAR NULL,
+  Ano DATE NULL,
+  Cod_Editora INTEGER UNSIGNED NULL,
+  PRIMARY KEY(Cod_Livro),
+  INDEX Livro_FKIndex1(Editora_Cod_Editora),
+  INDEX Livro_FKIndex2(Estoque_Cod_Livro)
+);
+
+CREATE TABLE Itens_Pedido (
+  idItens_Pedido INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Livro_Estoque_Cod_Livro INTEGER UNSIGNED NULL,
+  Livro_Editora_Cod_Editora INTEGER UNSIGNED NULL,
+  Livro_Cod_Livro INTEGER UNSIGNED NULL,
+  Pedido_Num_Pedido INTEGER UNSIGNED NULL,
+  Qtd_Pedido INTEGER UNSIGNED NULL,
+  Valores_Itens_Pedidos FLOAT NULL,
+  PRIMARY KEY(idItens_Pedido),
+  INDEX Itens_Pedido_FKIndex1(Livro_Cod_Livro)
+);
+
+CREATE TABLE Pedido (
+  Num_Pedido INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Itens_Pedido_idItens_Pedido INTEGER UNSIGNED NOT NULL,
+  Cliente_Cod_Cliente INTEGER UNSIGNED NOT NULL,
+  Cliente_Cod_Cli INTEGER UNSIGNED NULL,
+  Data_Pedido DATE NULL,
+  Valor_Pedido FLOAT NULL,
+  PRIMARY KEY(Num_Pedido),
+  INDEX Pedido_FKIndex1(Cliente_Cod_Cliente),
+  INDEX Pedido_FKIndex2(Itens_Pedido_idItens_Pedido)
+);
+
+
